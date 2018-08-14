@@ -1,10 +1,14 @@
 package android.ruben.com.expandablelistviewbutton.adapter;
 
 import android.content.Context;
+import android.ruben.com.expandablelistviewbutton.Model.DetalleInfo;
 import android.ruben.com.expandablelistviewbutton.Model.GrupoInfo;
+import android.ruben.com.expandablelistviewbutton.R;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -53,13 +57,38 @@ public class ListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        return null;
+    public View getGroupView(int groupPosition, boolean isExpanded, View view, ViewGroup parent) {
+
+        GrupoInfo grupoInfo = (GrupoInfo) getGroup(groupPosition);
+        if (view == null) {
+            LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = layoutInflater.inflate(R.layout.group_row, parent, false);
+        }
+
+        TextView textView = view.findViewById(R.id.header);
+
+        textView.setText(grupoInfo.getNombre());
+
+        return view;
     }
 
     @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        return null;
+    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View view, ViewGroup parent) {
+
+        DetalleInfo detalleInfo = (DetalleInfo) getChild(groupPosition, childPosition);
+
+        LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        if (view == null) {
+            view = layoutInflater.inflate(R.layout.child_row, parent, false);
+        }
+
+        TextView textSecuencia = view.findViewById(R.id.secuence);
+        TextView textChildItem = view.findViewById(R.id.childItem);
+        textSecuencia.setText(detalleInfo.getSecuencia());
+        textChildItem.setText(detalleInfo.getNombre());
+
+
+        return view;
     }
 
     @Override
