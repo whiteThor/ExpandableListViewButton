@@ -63,11 +63,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         loadData();
 
-        ExpandableListView listView = findViewById(R.id.myList);
+        mListView = findViewById(R.id.myList);
 
-        ListAdapter listAdapter = new ListAdapter(this, mGrupoInfos);
+        mListAdapter = new ListAdapter(this, mGrupoInfos);
 
-        listView.setAdapter(listAdapter);
+        mListView.setAdapter(mListAdapter);
 
         expandAll();
 
@@ -76,9 +76,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button.setOnClickListener(this);
 
 
-        listView.setOnChildClickListener(myListItemClicked);
+        mListView.setOnChildClickListener(myListItemClicked);
 
-        listView.setOnGroupClickListener(myListGroupClicked);
+        mListView.setOnGroupClickListener(myListGroupClicked);
 
     }
 
@@ -124,9 +124,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         //get the children for the group
-        List<DetalleInfo> productList = headerInfo.getDetalleInfoList();
+        ArrayList<DetalleInfo> productList = (ArrayList<DetalleInfo>) headerInfo.getDetalleInfoList();
         //size of the children list
-        int listSize = productList.size();
+        int listSize = productList != null ? productList.size() : 1;
         //add to the counter
         listSize++;
 

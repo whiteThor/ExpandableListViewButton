@@ -1,11 +1,12 @@
 package android.ruben.com.expandablelistviewbutton.Model;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GrupoInfo {
     private String mNombre;
-    private List<DetalleInfo> mDetalleInfoList;
+    private List<DetalleInfo> mDetalleInfoList = new ArrayList<DetalleInfo>();
 
     public GrupoInfo() {
     }
